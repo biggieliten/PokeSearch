@@ -10,7 +10,7 @@ export const PokeSearch = () => {
     data,
     loading,
     //  error
-  } = useFetch<PokePayload>(`https://pokeapi.co/api/v2/pokemon/${searchValue}`);
+  } = useFetch<PokePayload>(`http://localhost:5243/pokemon/${searchValue}`);
 
   useEffect(() => {
     // console.log("Search value changed:", searchValue);
@@ -33,6 +33,7 @@ export const PokeSearch = () => {
             )}
           </div>
           <div className="searchForm">
+            <p className="">Search Pokémon by Name or ID</p>
             <TextField
               required
               label="Search Pokémon"
