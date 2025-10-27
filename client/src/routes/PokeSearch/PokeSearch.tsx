@@ -1,21 +1,21 @@
-import { TextField, Button, CircularProgress } from "@mui/material";
+import { Alert, TextField, Button, CircularProgress } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import type { PokePayload } from "../../types/Poke";
 
 export const PokeSearch = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [alertVisible, setAlertVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-  const {
-    data,
-    loading,
-    //  error
-  } = useFetch<PokePayload>(`http://localhost:5243/pokemon/${searchValue}`);
+  const { data, loading, error } = useFetch<PokePayload>(
+    `http://localhost:5243/pokemon/${searchValue}`
+  );
 
   useEffect(() => {
-    // console.log("Search value changed:", searchValue);
-    console.log(data?.name);
-  }, [data?.name]);
+    if (error) {
+      setAlertVisible(true);
+    }
+  }, [error]);
 
   return (
     <>
@@ -29,18 +29,31 @@ export const PokeSearch = () => {
                 <img src={data?.sprites?.front_default} alt={data.name} />
               </>
             ) : (
-              <p>Could not find Pokémon: {searchValue}</p>
+              <></>
             )}
           </div>
           <div className="searchForm">
-            <p className="">Search Pokémon by Name or ID</p>
+            <p className="searchFormTitle">Search Pokémon by Name or ID</p>
+
+            {error ? (
+              alertVisible && (
+                <Alert
+                  severity="error"
+                  onClose={() => {
+                    setAlertVisible(!alertVisible);
+                  }}
+                >{`Could not find Pokémon: ${searchValue}`}</Alert>
+              )
+            ) : (
+              <></>
+            )}
             <TextField
               required
               label="Search Pokémon"
               variant="outlined"
               inputRef={inputRef}
               className="input"
-              style={{ marginBottom: 10 }}
+              style={{ marginBottom: 10, marginTop: 10 }}
             />
             <Button
               variant="contained"
