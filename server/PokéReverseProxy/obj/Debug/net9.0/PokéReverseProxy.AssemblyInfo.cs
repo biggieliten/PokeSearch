@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PokéReverseProxy")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85b1f9524cbf89ca0c411af4e56e3108519ae718")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ceb66d163f3e42283d4d3229e96ffc5b594260e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("PokéReverseProxy")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PokéReverseProxy")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
