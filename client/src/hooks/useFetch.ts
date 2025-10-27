@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function useFetch<T>(url: string) {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -11,17 +11,17 @@ function useFetch<T>(url: string) {
       setError(null);
       try {
         const response = await fetch(url);
+
         if (!response.ok) {
-          throw new Error(
-            `An unexpected error has occured: ${response.statusText}`
-          );
+          const msg = `Request failed: ${response.status} ${response.statusText}`;
+          setError(msg);
         }
 
         const jsonData = await response.json();
-
         setData(jsonData);
       } catch (error) {
         console.error(error);
+        setData(undefined);
       } finally {
         setLoading(false);
       }
