@@ -29,3 +29,4 @@ C:\Users\fille\Desktop\Poké - Code Test\server\PokéReverseProxy\obj\Debug\net9
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéReverseProxy\obj\Debug\net9.0\PokéReverseProxy.pdb
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéReverseProxy\obj\Debug\net9.0\PokéReverseProxy.genruntimeconfig.cache
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéReverseProxy\obj\Debug\net9.0\ref\PokéReverseProxy.dll
+C:\Users\fille\Desktop\Poké - Code Test\server\PokéReverseProxy\obj\Debug\net9.0\PokéReverseProxy.sourcelink.json

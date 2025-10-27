@@ -30,3 +30,4 @@ C:\Users\fille\Desktop\Poké - Code Test\server\PokéApi\obj\Debug\net9.0\refint
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéApi\obj\Debug\net9.0\PokéApi.pdb
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéApi\obj\Debug\net9.0\PokéApi.genruntimeconfig.cache
 C:\Users\fille\Desktop\Poké - Code Test\server\PokéApi\obj\Debug\net9.0\ref\PokéApi.dll
+C:\Users\fille\Desktop\Poké - Code Test\server\PokéApi\obj\Debug\net9.0\PokéApi.sourcelink.json
