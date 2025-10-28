@@ -4,12 +4,21 @@ import useFetch from "../../hooks/useFetch";
 import type { PokePayload } from "../../types/Poke";
 
 export const PokeSearch = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const [url, setUrl] = useState<string | null>(null);
   const [alertVisible, setAlertVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { data, loading, error } = useFetch<PokePayload>(
-    `http://localhost:5243/pokemon/${searchValue}`
-  );
+  const baseUrl = "http://localhost:5243/pokemon/";
+
+  useEffect(() => {
+    if (!url) return;
+  }, [url]);
+
+  const handleSubmit = () => {
+    const input = inputRef.current;
+    setUrl(`${baseUrl}${input?.value}`);
+  };
+
+  const { data, loading, error } = useFetch<PokePayload>(url);
 
   useEffect(() => {
     if (error) {
@@ -42,7 +51,7 @@ export const PokeSearch = () => {
                   onClose={() => {
                     setAlertVisible(!alertVisible);
                   }}
-                >{`Could not find Pokémon: ${searchValue}`}</Alert>
+                >{`Could not find Pokémon: ${inputRef.current?.value}`}</Alert>
               )
             ) : (
               <></>
@@ -57,7 +66,7 @@ export const PokeSearch = () => {
             />
             <Button
               variant="contained"
-              onClick={() => setSearchValue(inputRef.current?.value || "")}
+              onClick={() => handleSubmit()}
               className="searchButton"
               style={{
                 backgroundColor: "#f6ff00ff",
