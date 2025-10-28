@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 
-function useFetch<T>(url: string) {
+function useFetch<T>(url: string | null) {
   const [data, setData] = useState<T>();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAPI = async () => {
+      if (!url) return;
+
       setLoading(true);
       setError(null);
+
       try {
         const response = await fetch(url);
 
