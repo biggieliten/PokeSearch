@@ -4,21 +4,13 @@ import useFetch from "../../hooks/useFetch";
 import type { PokePayload } from "../../types/Poke";
 
 export const PokeSearch = () => {
-  const [url, setUrl] = useState<string | null>(null);
+  const [searchValue, setSearchValue] = useState("");
   const [alertVisible, setAlertVisible] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-  const baseUrl = "http://localhost:5243/pokemon/";
-
-  useEffect(() => {
-    if (!url) return;
-  }, [url]);
-
-  const handleSubmit = () => {
-    const input = inputRef.current;
-    setUrl(`${baseUrl}${input?.value}`);
-  };
-
-  const { data, loading, error } = useFetch<PokePayload>(url);
+  const { data, loading, error, setShouldFetch } = useFetch<PokePayload>(
+     `http://localhost:5091/api/pokemon/${searchValue}`
+    
+  );
 
   useEffect(() => {
     if (error) {
@@ -35,7 +27,7 @@ export const PokeSearch = () => {
               <CircularProgress />
             ) : data ? (
               <>
-                <img src={data?.sprites?.front_default} alt={data.name} />
+                <img src={data?.image} alt={data.name} />
               </>
             ) : (
               <></>
@@ -51,7 +43,7 @@ export const PokeSearch = () => {
                   onClose={() => {
                     setAlertVisible(!alertVisible);
                   }}
-                >{`Could not find Pokémon: ${inputRef.current?.value}`}</Alert>
+                >{`Could not find Pokémon: ${searchValue}`}</Alert>
               )
             ) : (
               <></>
@@ -66,7 +58,10 @@ export const PokeSearch = () => {
             />
             <Button
               variant="contained"
-              onClick={() => handleSubmit()}
+              onClick={() =>{
+				  setSearchValue(inputRef.current?.value || "")
+				  setShouldFetch(true)
+			  } }
               className="searchButton"
               style={{
                 backgroundColor: "#f6ff00ff",
