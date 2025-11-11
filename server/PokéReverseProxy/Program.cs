@@ -6,7 +6,11 @@ var app = builder.Build();
 
 HttpClient httpClient = new HttpClient();
 
-app.UseCors(policy => policy.AllowAnyOrigin());
+app.UseCors(policy => policy
+	.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+	);
 
 async Task<IResult> GetPokemon(string identifier)
 {
