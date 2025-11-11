@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-function useFetch<T>(url: string | null) {
+function useFetch<T>(url: string) {
   const [data, setData] = useState<T>();
+  const [shouldFetch, setShouldFetch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAPI = async () => {
-      if (!url) return;
+		if(!shouldFetch) return;
 
       setLoading(true);
       setError(null);
-
       try {
         const response = await fetch(url);
 
@@ -27,13 +27,14 @@ function useFetch<T>(url: string | null) {
         setData(undefined);
       } finally {
         setLoading(false);
+		setShouldFetch(false);
       }
     };
     if (url) {
       fetchAPI();
     }
   }, [url]);
-  return { data, loading, error };
+  return { data, loading, error, setShouldFetch };
 }
 
 export default useFetch;
